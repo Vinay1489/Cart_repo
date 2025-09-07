@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 
 import connectDB from "./db.js";
 import authRouter from "./routes/User.js";
+import cartRouter from "./routes/Cart.js";
 dotenv.config();
 
 const app=express();
@@ -19,6 +20,7 @@ app.use(morgan("dev"));
 app.use(rateLimit({windowMs:60*1000,max:100}));
 
 app.use("/",authRouter);
+app.use("/",cartRouter);
 
 app.get("/check",(req,res)=>
 {
