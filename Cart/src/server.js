@@ -8,18 +8,21 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import connectDB from "./db.js";
+import authRouter from "./routes/User.js";
 dotenv.config();
 
 const app=express();
 
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 app.use(morgan("dev"));
 app.use(rateLimit({windowMs:60*1000,max:100}));
 
+app.use("/",authRouter);
+
 app.get("/check",(req,res)=>
 {
-    app.json({
+    res.json({
     Message:"Server is running fine"
 })
 })
